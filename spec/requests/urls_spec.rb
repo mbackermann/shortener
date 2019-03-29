@@ -1,8 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe "Urls", type: :request do
+RSpec.describe "Shortener API", type: :request do
+  let!(:urls) { create_list(:url, 120) }
+  let!(:url) { create(:url, visits: 10, url: 'https://mauricioackermann.com.br')}
+
+  describe "GET /top" do
+    before { get '/top' }
+    it 'returns top 100' do
+      expect(json.size).to eq(100)
+    end
+
+    it 'get most visited first' do
+      expect(json.first['url']).to eq('https://mauricioackermann.com.br')
+    end
+  end
   describe "POST /urls" do
-    let(:attributes) { { current_url: 'https://google.com' } }
+    let(:attributes) { { url: 'https://google.com' } }
 
     context('when valid request') do
       before { post '/urls', params: attributes }
@@ -24,7 +37,7 @@ RSpec.describe "Urls", type: :request do
       end
 
       it 'returns error message'do
-        expect(response.body).to match(/Current url can't be blank/)
+        expect(response.body).to match(/Url can't be blank/)
       end
     end
   end
