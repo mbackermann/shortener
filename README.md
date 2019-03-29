@@ -1,24 +1,29 @@
-# README
+### Usage ###
+```
+git clone https://github.com/mbackermann/shortner.git
+cd shortner
+bundle install
+rake db:create db:migrate
+rails s
+```
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Endpoints ####
 
-Things you may want to cover:
+```
+POST /urls # Creates a shortener for an URL
+params:
+  url (string, required): url wanted to be shortened
+```
 
-* Ruby version
+```
+GET /top # Show top 100 websites most frequently visited
+```
 
-* System dependencies
 
-* Configuration
+### Algorithm Explained
 
-* Database creation
+I used the MD5 Hashing of the url and get the first 6 chars of the hash to
+generate the shortener url
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
