@@ -13,7 +13,7 @@ class UrlsController < ApplicationController
 
   def top
     @urls = Url.order("visits DESC").limit(100)
-    render json: @urls, status: :ok, only: [:url, :visits, :title]
+    render json: @urls, status: :ok, only: [:url, :visits, :title, :short_url]
   end
 
   def redirect
