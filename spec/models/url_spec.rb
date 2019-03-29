@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Url, type: :model do
   it { should validate_presence_of(:current_url) }
-  it { should validate_presence_of(:short_url) }
-  it { should validate_presence_of(:sanitize_url) }
 
   it 'creates sanitized url from current url' do
     url = Url.new(current_url: 'https://google.com')
