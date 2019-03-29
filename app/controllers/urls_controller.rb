@@ -7,6 +7,7 @@ class UrlsController < ApplicationController
     if @url.nil?
       @url = Url.create!(url_params)
     end
+    SetWebsiteTitleJob.perform_later @url
     response_json({url: redirect_url(@url.short_url)}, :created)
   end
 
