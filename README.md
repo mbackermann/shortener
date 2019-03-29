@@ -48,8 +48,8 @@ Oriented Programming.
 
 ### Usage ###
 ```
-git clone https://github.com/mbackermann/shortner.git
-cd shortner
+git clone https://github.com/mbackermann/shortener.git
+cd shortener
 bundle install
 rake db:create db:migrate
 rails s
