@@ -1,7 +1,7 @@
 class Url < ApplicationRecord
   before_create :sanitize_url!, :short_url!
 
-  validates :url, presence: true
+  validates :url, presence: true, format: {with: URI::regexp(%w(http https))}
 
 
   def self.generate_sanitize_url(url)
@@ -13,8 +13,12 @@ class Url < ApplicationRecord
   end
 
   def short_url!
-    uuid = Digest::MD5.hexdigest(url).slice(0..5)
-    self.short_url = uuid
+    short_url = SecureRandom.base58(6)
+    if Url.where(short_url: short_url).any?
+      short_url!
+    else
+      self.short_url = short_url
+    end
   end
 
   def visited!

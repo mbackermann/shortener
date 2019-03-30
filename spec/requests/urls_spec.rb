@@ -21,7 +21,7 @@ RSpec.describe "Shortener API", type: :request do
       before { post '/urls', params: attributes }
 
       it 'creates an url' do
-        expect(json['url']).to eq('http://www.example.com/99999e')
+        expect(json['url']).to match(/(http:\/\/www\.example.com\/)([[:alnum:]]){6}/)
       end
 
       it 'returns status code 201' do
